@@ -1,11 +1,11 @@
 
-import 'package:animise_application/pages/customer/home/home_customer_page.dart';
-import 'package:animise_application/pages/customer/order/order_status_customer_page.dart';
-import 'package:animise_application/pages/customer/profile/profile_customer_page.dart';
+import 'package:animise_application/screens/customer/home/home_customer_page.dart';
+import 'package:animise_application/screens/customer/order/order_status_customer_page.dart';
+import 'package:animise_application/screens/customer/profile/profile_customer_page.dart';
 import 'package:animise_application/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../../pages/customer/chat/chat_customer_page.dart';
+import '../../../screens/customer/chat/chat_customer_page.dart';
 
 class MainCustomerPage extends StatefulWidget {
 

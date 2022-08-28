@@ -1,8 +1,8 @@
 // ignore: unused_import
-import 'package:animise_application/pages/admin/order/tab/order_in_page.dart';
-import 'package:animise_application/pages/admin/order/tab/order_process_page.dart';
-import 'package:animise_application/pages/admin/order/tab/order_reject_page.dart';
-import 'package:animise_application/pages/admin/order/tab/order_send_page.dart';
+import 'package:animise_application/screens/admin/order/tab/order_in_page.dart';
+import 'package:animise_application/screens/admin/order/tab/order_process_page.dart';
+import 'package:animise_application/screens/admin/order/tab/order_reject_page.dart';
+import 'package:animise_application/screens/admin/order/tab/order_send_page.dart';
 import 'package:animise_application/theme/theme.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import

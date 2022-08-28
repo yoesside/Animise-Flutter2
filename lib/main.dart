@@ -1,31 +1,31 @@
 // import 'dart:js';
 
-import 'package:animise_application/pages/admin/product/add_product_page.dart';
+import 'package:animise_application/screens/admin/product/add_product_page.dart';
 // ignore: unused_import
-import 'package:animise_application/pages/admin/banner/modify_banner_page.dart';
-import 'package:animise_application/pages/customer/product/view_product_page.dart';
+import 'package:animise_application/screens/admin/banner/modify_banner_page.dart';
+import 'package:animise_application/screens/customer/product/view_product_page.dart';
 // ignore: unused_import
 
-import 'package:animise_application/pages/customer/profile/edit_address_page.dart';
-import 'package:animise_application/pages/customer/profile/edit_name_phonenum_page.dart';
-import 'package:animise_application/pages/customer/profile/edit_password_page.dart';
+import 'package:animise_application/screens/customer/profile/edit_address_page.dart';
+import 'package:animise_application/screens/customer/profile/edit_name_phonenum_page.dart';
+import 'package:animise_application/screens/customer/profile/edit_password_page.dart';
 // ignore: unused_import
-import 'package:animise_application/pages/customer/home/home_customer_page.dart';
-import 'package:animise_application/pages/admin/home/homescreen_admin_page.dart';
+import 'package:animise_application/screens/customer/home/home_customer_page.dart';
+import 'package:animise_application/screens/admin/home/homescreen_admin_page.dart';
 // ignore: unused_import
-import 'package:animise_application/pages/admin/order/order_list_page.dart';
+import 'package:animise_application/screens/admin/order/order_list_page.dart';
 // ignore: unused_import
-import 'package:animise_application/pages/customer/product/search/search_customer_page.dart';
-import 'package:animise_application/pages/customer/cart/shopping_cart_page.dart';
-import 'package:animise_application/pages/customer/profile/wishlist/wishlist_customer_page.dart';
+import 'package:animise_application/screens/customer/product/search/search_customer_page.dart';
+import 'package:animise_application/screens/customer/cart/shopping_cart_page.dart';
+import 'package:animise_application/screens/customer/profile/wishlist/wishlist_customer_page.dart';
 // ignore: unused_import
-import 'package:animise_application/pages/customer/payment/payment_page.dart';
+import 'package:animise_application/screens/customer/payment/payment_page.dart';
 // ignore: unused_import
-import 'package:animise_application/pages/customer/cart/shopping_cart_page_null.dart';
-import 'package:animise_application/pages/auths/sign_in_page.dart';
-import 'package:animise_application/pages/auths/sign_up_page.dart';
+import 'package:animise_application/screens/customer/cart/shopping_cart_page_null.dart';
+import 'package:animise_application/screens/auths/sign_in_page.dart';
+import 'package:animise_application/screens/auths/sign_up_page.dart';
 // ignore: unused_import
-import 'package:animise_application/pages/splash/splash_page.dart';
+import 'package:animise_application/screens/splash/splash_page.dart';
 import 'package:animise_application/widgets/customer/home/homescreen_navbar.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
