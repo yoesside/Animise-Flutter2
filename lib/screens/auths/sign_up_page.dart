@@ -1,7 +1,7 @@
 import 'package:animise_application/theme/theme.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import '../../config/routes.dart';
+import '../../utils/routes/routes.dart';
 
 class SignUpPage extends StatefulWidget {
 
@@ -281,7 +281,7 @@ class _SignUpPageState extends State<SignUpPage> {
         margin: EdgeInsets.only(top: 35),
         child: TextButton(
           onPressed: () async {
-			  	var endpoint = (api['baseUrl'] as String) + '/' + (api['version'] as String) + (((api['endpoints'] as Map)['auth'] as Map)['register'] as String);
+			  	var endpoint = (routeConfig['baseUrl'] as String) + '/' + (routeConfig['version'] as String) + (((routeConfig['endpoints'] as Map)['auth'] as Map)['register'] as String);
 
 				Dio dio = new Dio();
 

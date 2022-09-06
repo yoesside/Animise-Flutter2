@@ -2,7 +2,9 @@
 
 import 'dart:async';
 
+import 'package:animise_application/models/user_model.dart';
 import 'package:animise_application/theme/theme.dart';
+import 'package:animise_application/utils/storage/storage.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -15,7 +17,21 @@ class _SplashPageState extends State<SplashPage> {
 
   void initState() {
 
-    Timer(Duration(seconds: 3),()=> Navigator.pushNamed(context, '/sign-in'));
+    Timer(Duration(seconds: 3), () {
+
+      Storage.getString('role').then((role) {
+        if (role == null) {
+          Navigator.pushNamed(context, '/sign-in');
+        } else if (role == User.USER_ROLE_ADMIN) {
+          Navigator.pushReplacementNamed(context, '/homescreen-admin');
+        } else {
+          Navigator.pushReplacementNamed(context, '/main-customer');
+        }
+      });
+
+    });
+
+    // Timer(Duration(seconds: 3),()=> Navigator.pushNamed(context, '/sign-in'));
 
     super.initState();
     

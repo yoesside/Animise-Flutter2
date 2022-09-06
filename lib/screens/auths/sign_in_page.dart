@@ -1,9 +1,19 @@
 // import 'dart:io';
 
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:animise_application/models/user_model.dart';
 import 'package:animise_application/theme/theme.dart';
+import 'package:animise_application/utils/helpers/routes/path_parameter.dart';
+import 'package:animise_application/utils/helpers/routes/routes_generator.dart';
+import 'package:animise_application/utils/net/api.dart';
+import 'package:animise_application/utils/storage/storage.dart';
+import 'package:animise_application/widgets/dialog/alert.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:animise_application/config/routes.dart';
+
+import '../../utils/routes/routes.dart';
 
 // ignore: must_be_immutable
 class SignInPage extends StatelessWidget {
@@ -124,77 +134,59 @@ class SignInPage extends StatelessWidget {
         child: TextButton(
           onPressed: () async {
 
-				var endpoint = (api['baseUrl'] as String) + '/' + (api['version'] as String) + (((api['endpoints'] as Map)['auth'] as Map)['login'] as String);
+            var api = new Api();
+            var generator = new RouteGenerator();
+            
+            generator.noVersion();
+            generator.setEndpoint(generateUrlFromBaseUrl(routeConfig['endpoints']['auth']['login']), new List<PathParameter>.empty());
 
-				Dio dio = new Dio();
+            api.post(generator.getFullEndpointUrl(), data: {
+              'username': username.text,
+              'password': password.text,
+            });
 
-				try {
-					
-					// username : rini66
-					// password : 123456
-			  		Response<Map> response;
-					dynamic data = {
-						'username': username.text,
-						'password': password.text,
-					};
-				  
-					response = await dio.post(endpoint, data: data, options: Options(
-						headers: {
-							'Accept': 'application/json',
-							'Content-Type': 'application/json'
-						}
-					));
+            api.onSuccess(onSuccess: (Response<Map> response) {
 
-					if (response.data?['data']['role'] == 'admin') {
-						Navigator.pushNamedAndRemoveUntil(context, '/homescreen-admin', (route) => false);
-					} else {
-						Navigator.pushNamedAndRemoveUntil(context, '/main-customer', (route) => false);
-					}
+              dynamic decode = json.decode(response.toString());
 
-          
+              String role = decode['data']['role'];
 
-					// AlertDialog alert = AlertDialog(
-					// 	title: Text("Login"),
-					// 	content: Text("Login success"),
-					// );
+              Storage.saveToken(decode['data']['token']);
+              Storage.saveString('role', role);
 
-					// // show the dialog
-					// showDialog(
-					// 	context: context,
-					// 	builder: (BuildContext context) {
-					// 		return alert;
-					// 	},
-					// );
-				} on DioError catch (e) {
-					Response? response = e.response;
-					String content = '';
+              if (role == User.USER_ROLE_ADMIN) {
+                Navigator.pushReplacementNamed(context, '/homescreen-admin');
+              } else {
+                Navigator.pushReplacementNamed(context, '/main-customer');
+              }
 
-					if (response?.data['errors']['username'] != null) {
-					  	content = response?.data['errors']['username'][0];
-					} else if (response?.data['errors']['password'] != null) {
-					  	content = response?.data['errors']['password'][0];
-					} else {
-						content = response?.data['errors']['user'][0];
-					}
-          print(response);
+            });
 
-					AlertDialog alert = AlertDialog(
-						title: Text("Validation error"),
-						content: Text(content),
-					);
+            api.onFailed(onFailed: (DioError error) {
 
-					// show the dialog
-					showDialog(
-						context: context,
-						builder: (BuildContext context) {
-							return alert;
-						},
-					);
+              dynamic decode = json.decode(error.response.toString());
 
-					// print((e.response?.data as Map)['errors']);
-				}
+              int? statusCode = error.response?.statusCode;
 
-				// print(api.endpoints?.auth);
+              var text   = 'Something went wrong';
+              var errors = decode['errors'];
+
+              if (statusCode == HttpStatus.unprocessableEntity) {
+
+                if (errors['username'] != null) {
+                  text = errors['username'][0];
+                } else if (errors['password'] != null) {
+                  text = errors['password'][0];
+                } else {
+                  text = errors['user'][0];
+                }
+
+              } else if (statusCode == HttpStatus.notFound) {
+                text = errors['user'][0];
+              }
+
+              fireAlert(context, Text(text), title: 'Validation error');
+            });
 		  },
           style: TextButton.styleFrom(
             backgroundColor: primaryYellowColor,

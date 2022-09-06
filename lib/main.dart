@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => MainCustomerPage(),
+        '/': (context) => SplashPage(),
         //Klo mau ganti route ke DetailPage, tulis "DetailPage()"
         //Klo mau ganti route ke ViewProductPage, tulis "ViewProductPage()"
         //biar gak perlu lagi nge cek tiap halaman buka dari halam splash page 
