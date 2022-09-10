@@ -11,7 +11,13 @@ class Storage {
   static Future<String?> getString(String key) async {
     final prefs = await SharedPreferences.getInstance();
 
-    return prefs.getString('token');
+    return prefs.getString(key);
+  }
+
+  static removeToken() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.remove('token');
   }
 
   static saveToken(String token) async {

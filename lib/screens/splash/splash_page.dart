@@ -17,11 +17,13 @@ class _SplashPageState extends State<SplashPage> {
 
   void initState() {
 
+    // Storage.removeToken();
+
     Timer(Duration(seconds: 3), () {
 
       Storage.getString('role').then((role) {
         if (role == null) {
-          Navigator.pushNamed(context, '/sign-in');
+          Navigator.pushReplacementNamed(context, '/sign-in');
         } else if (role == User.USER_ROLE_ADMIN) {
           Navigator.pushReplacementNamed(context, '/homescreen-admin');
         } else {
