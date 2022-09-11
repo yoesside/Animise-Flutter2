@@ -1,7 +1,17 @@
+import 'dart:convert';
+
+import 'package:animise_application/services/admin/product_service.dart';
 import 'package:animise_application/theme/theme.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+
+import '../../../utils/helpers/routes/path_parameter.dart';
+import '../../../utils/helpers/routes/routes_generator.dart';
+import '../../../utils/net/api.dart';
+import '../../../utils/routes/routes.dart';
+import '../../../widgets/dialog/alert.dart';
 
 class AddProductPage extends StatefulWidget {
   @override
@@ -13,7 +23,11 @@ class _AddProductPageState extends State<AddProductPage> {
   bool activePreOrderSwitch = false;
   final ImagePicker _picker = ImagePicker();
   XFile? image;
-  
+
+  TextEditingController name             = TextEditingController();
+  TextEditingController price            = TextEditingController();
+  TextEditingController release          = TextEditingController();
+  TextEditingController estimatedArrival = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -96,6 +110,7 @@ class _AddProductPageState extends State<AddProductPage> {
               ]),
               TextField(
                 autofocus: true,
+                controller: name,
                 decoration: InputDecoration(
                   hintText: "Enter your name product",
                 ),
@@ -122,60 +137,60 @@ class _AddProductPageState extends State<AddProductPage> {
               Transform.scale(
                 scale: 1,
                 child: RadioListTile(
-                  value: 0,
+                  value: 1,
                   groupValue: selectedValue,
                   title: Text("PVC Figure"),
-                  onChanged: (value) => setState(() => selectedValue = 0),
+                  onChanged: (value) => setState(() => selectedValue = 1),
                   activeColor: primaryOrangeColor,
                 ),
               ),
               RadioListTile(
-                value: 1,
-                groupValue: selectedValue,
-                title: Text("Nendoroid"),
-                onChanged: (value) => setState(() => selectedValue = 1),
-                activeColor: primaryOrangeColor,
-              ),
-              RadioListTile(
                 value: 2,
                 groupValue: selectedValue,
-                title: Text("Figma"),
+                title: Text("Nendoroid"),
                 onChanged: (value) => setState(() => selectedValue = 2),
                 activeColor: primaryOrangeColor,
               ),
               RadioListTile(
                 value: 3,
                 groupValue: selectedValue,
-                title: Text("Model Kits"),
+                title: Text("Figma"),
                 onChanged: (value) => setState(() => selectedValue = 3),
                 activeColor: primaryOrangeColor,
               ),
               RadioListTile(
                 value: 4,
                 groupValue: selectedValue,
-                title: Text("CDs"),
+                title: Text("Model Kits"),
                 onChanged: (value) => setState(() => selectedValue = 4),
                 activeColor: primaryOrangeColor,
               ),
               RadioListTile(
                 value: 5,
                 groupValue: selectedValue,
-                title: Text("Manga"),
+                title: Text("CDs"),
                 onChanged: (value) => setState(() => selectedValue = 5),
                 activeColor: primaryOrangeColor,
               ),
               RadioListTile(
                 value: 6,
                 groupValue: selectedValue,
-                title: Text("Light Novel"),
+                title: Text("Manga"),
                 onChanged: (value) => setState(() => selectedValue = 6),
                 activeColor: primaryOrangeColor,
               ),
               RadioListTile(
                 value: 7,
                 groupValue: selectedValue,
-                title: Text("Merchandise"),
+                title: Text("Light Novel"),
                 onChanged: (value) => setState(() => selectedValue = 7),
+                activeColor: primaryOrangeColor,
+              ),
+              RadioListTile(
+                value: 8,
+                groupValue: selectedValue,
+                title: Text("Merchandise"),
+                onChanged: (value) => setState(() => selectedValue = 8),
                 activeColor: primaryOrangeColor,
               ),
               Row(
@@ -196,6 +211,7 @@ class _AddProductPageState extends State<AddProductPage> {
               ]),
               TextField(
                 autofocus: true,
+                controller: price,
                 decoration: InputDecoration(
                   hintText: "Enter your price",
                 ),
@@ -227,7 +243,6 @@ class _AddProductPageState extends State<AddProductPage> {
                     onChanged: (value) {
                       setState(() {
                         activePreOrderSwitch = value;
-                        print(activePreOrderSwitch);
                       });
                     },
                     activeTrackColor: primaryOrangeColor,
@@ -246,6 +261,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 ),
               ),
               TextField(
+                controller: release,
                 autofocus: true,
                 decoration: InputDecoration(
                   hintText: "Enter release product date",
@@ -263,6 +279,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 ),
               ),
               TextField(
+                controller: estimatedArrival,
                 autofocus: true,
                 decoration: InputDecoration(
                   hintText: "Enter estimated arrival date",
@@ -288,7 +305,29 @@ class _AddProductPageState extends State<AddProductPage> {
                     style: ElevatedButton.styleFrom(
                       primary: primaryOrangeColor,
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+
+                      dynamic map = {
+                        'category_id': selectedValue,
+                        'name': name.text,
+                        'description': 'asasdfsddf',
+                        'price': price.text,
+                        'stock': 10,
+                        'pre_order': activePreOrderSwitch ? 1 : 0,
+                        'release_date': release.text,
+                        'estimated_date': estimatedArrival.text,
+                      };
+
+                      if (image != null) {
+                        map['image'] = await MultipartFile.fromFile(image == null ? '' : image!.path, filename: image?.name);
+                      }
+
+                      var formData = FormData.fromMap(map);
+
+                      var service = new ProductService(context);
+
+                      service.addProduct(formData);
+                    },
                   ),
                 ],
               )

@@ -1,48 +1,78 @@
+import 'package:animise_application/utils/storage/storage.dart';
 import 'package:dio/dio.dart';
 
 class Api {
 
-  late Response<Map> response;
+  late Response<dynamic> response;
   late Function successCallback, failedCallback;
 
-  Future<Api> get(endpoint, {data, options}) async {
+  Future<Api> get(endpoint, {data, options, contentType = 'application/json'}) async {
     Dio dio = new Dio();
 
-    try {
-      response = await dio.get(endpoint, options: Options(
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-      ));
+    Storage.getToken().then((token) async {
+      try {
 
-      successCallback(response);
-    } on DioError catch (e) {
-      if (failedCallback != null) {
-        failedCallback(e);
+        if (token != null) {
+          await dio.get(endpoint, options: Options(
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': contentType,
+                'Authorization': 'Bearer ' + token,
+              }
+          )).then((response) {
+            successCallback(response);
+          });
+        } else {
+          await dio.get(endpoint, options: Options(
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': contentType,
+              }
+          )).then((response) {
+            successCallback(response);
+          });
+        }
+
+        successCallback(response);
+      } on DioError catch (e) {
+        if (failedCallback != null) {
+          failedCallback(e);
+        }
       }
-    }
+    });
 
     return this;
   }
 
-  Future<Api> post(endpoint, {data, options}) async {
+  Future<Api> post(endpoint, {data, options, contentType = 'application/json'}) async {
     Dio dio = new Dio();
 
-    try {
-      response = await dio.post(endpoint, data: data, options: Options(
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-      ));
+    await Storage.getToken().then((token) async {
 
-      successCallback(response);
-    } on DioError catch(e) {
-      if (failedCallback != null) {
-        failedCallback(e);
+      try {
+
+        dynamic headers = {
+          'Accept': 'application/json',
+          'Content-Type': contentType,
+        };
+
+        if (token != null) {
+          headers['Authorization'] = 'Bearer ' + token;
+        }
+
+        await dio.post(endpoint, data: data, options: Options(
+            headers: headers
+        )).then((response) {
+          successCallback(response);
+        });
+
+      } on DioError catch(e) {
+        if (failedCallback != null) {
+          failedCallback(e);
+        }
       }
-    }
+
+    });
 
     return this;
   }

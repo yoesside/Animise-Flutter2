@@ -13,6 +13,11 @@ dynamic routeConfig = {
 			"products": {
 				"recommendation": "/products/recommendation"
 			}
+		},
+		"admin": {
+			"products": {
+				"add_product": "/admin/products",
+			}
 		}
 	}
 };
