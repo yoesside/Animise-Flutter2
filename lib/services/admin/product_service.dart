@@ -17,13 +17,24 @@ class ProductService {
 
   ProductService(this.context);
 
+  Future retrieveAllProduct() async {
+
+    var api = new Api();
+    var generator = new RouteGenerator();
+
+    generator.noVersion();
+    generator.setEndpoint(generateUrlFromBaseUrl(routeConfig['endpoints']['admin']['products']['index']), new List<PathParameter>.empty());
+
+    return api.futureGet(generator.getFullEndpointUrl());
+  }
+
   void addProduct(FormData formData) {
 
     var api = new Api();
     var generator = new RouteGenerator();
 
     generator.noVersion();
-    generator.setEndpoint(generateUrlFromBaseUrl(routeConfig['endpoints']['admin']['products']['add_product']), new List<PathParameter>.empty());
+    generator.setEndpoint(generateUrlFromBaseUrl(routeConfig['endpoints']['admin']['products']['create']), new List<PathParameter>.empty());
 
     api.post(generator.getFullEndpointUrl(), data: formData);
 

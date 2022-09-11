@@ -16,7 +16,8 @@ dynamic routeConfig = {
 		},
 		"admin": {
 			"products": {
-				"add_product": "/admin/products",
+				"create": "/admin/products",
+				"index": "/admin/products",
 			}
 		}
 	}

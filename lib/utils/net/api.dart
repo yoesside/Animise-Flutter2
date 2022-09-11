@@ -2,9 +2,26 @@ import 'package:animise_application/utils/storage/storage.dart';
 import 'package:dio/dio.dart';
 
 class Api {
-
-  late Response<dynamic> response;
   late Function successCallback, failedCallback;
+
+  Future futureGet(endpoint, {data, options, contentType = 'application/json'}) async {
+    Dio dio = new Dio();
+
+    return Storage.getToken().then((token) async {
+      dynamic headers = {
+        'Accept': 'application/json',
+        'Content-Type': contentType,
+      };
+
+      if (token != null) {
+        headers['Authorization'] = 'Bearer ' + token;
+      }
+
+      return await dio.get(endpoint, options: Options(
+          headers: headers
+      ));
+    });
+  }
 
   Future<Api> get(endpoint, {data, options, contentType = 'application/json'}) async {
     Dio dio = new Dio();
@@ -12,28 +29,22 @@ class Api {
     Storage.getToken().then((token) async {
       try {
 
+        dynamic headers = {
+          'Accept': 'application/json',
+          'Content-Type': contentType,
+        };
+
         if (token != null) {
-          await dio.get(endpoint, options: Options(
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': contentType,
-                'Authorization': 'Bearer ' + token,
-              }
-          )).then((response) {
-            successCallback(response);
-          });
-        } else {
-          await dio.get(endpoint, options: Options(
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': contentType,
-              }
-          )).then((response) {
-            successCallback(response);
-          });
+          headers['Authorization'] = 'Bearer ' + token;
         }
 
-        successCallback(response);
+        await dio.get(endpoint, options: Options(
+            headers: headers
+        )).then((response) {
+          if (successCallback != null) {
+            successCallback(response);
+          }
+        });
       } on DioError catch (e) {
         if (failedCallback != null) {
           failedCallback(e);
@@ -63,7 +74,9 @@ class Api {
         await dio.post(endpoint, data: data, options: Options(
             headers: headers
         )).then((response) {
-          successCallback(response);
+          if (successCallback != null) {
+            successCallback(response);
+          }
         });
 
       } on DioError catch(e) {

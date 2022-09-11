@@ -7,12 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-import '../../../utils/helpers/routes/path_parameter.dart';
-import '../../../utils/helpers/routes/routes_generator.dart';
-import '../../../utils/net/api.dart';
-import '../../../utils/routes/routes.dart';
-import '../../../widgets/dialog/alert.dart';
-
 class AddProductPage extends StatefulWidget {
   @override
   _AddProductPageState createState() => _AddProductPageState();

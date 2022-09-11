@@ -16,12 +16,15 @@ class ContainerProductWithDelete extends StatelessWidget {
   // String realeses;
   // String estimated_arrival;
 
+  int id;
+
   ContainerProductWithDelete({
     required this.imageProduct,
     required this.imagePreorder_Ready,
     required this.nameProduct,
     // required this.category,
     required this.price,
+    required this.id,
     // required this.realeses,
     // required this.estimated_arrival
   });
@@ -43,7 +46,7 @@ class ContainerProductWithDelete extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              child: Image.asset(
+              child: Image.network(
                 imageProduct,
                 width: 140,
                 height: 140,
