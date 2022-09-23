@@ -75,7 +75,7 @@ class ContainerProductWithDelete extends StatelessWidget {
                   fontSize: 12,
                   fontWeight: FontWeight.bold),
             ),
-            DeleteButton(),
+            DeleteButton(id),
           ],
         ),
       ),

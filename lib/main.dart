@@ -1,5 +1,6 @@
 // import 'dart:js';
 
+import 'package:animise_application/providers/state_notifier.dart';
 import 'package:animise_application/screens/admin/product/add_product_page.dart';
 // ignore: unused_import
 import 'package:animise_application/screens/admin/banner/modify_banner_page.dart';
@@ -28,6 +29,7 @@ import 'package:animise_application/screens/auths/sign_up_page.dart';
 import 'package:animise_application/screens/splash/splash_page.dart';
 import 'package:animise_application/widgets/customer/home/homescreen_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 // ignore: unused_import
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,30 +43,33 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => SplashPage(),
-        //Klo mau ganti route ke DetailPage, tulis "DetailPage()"
-        //Klo mau ganti route ke ViewProductPage, tulis "ViewProductPage()"
-        //biar gak perlu lagi nge cek tiap halaman buka dari halam splash page 
-        '/sign-in': (context) => SignInPage(),
-        '/sign-up': (context) => SignUpPage(),
-        '/homescreen-admin': (context) => HomescreenAdminPage(),
-        '/add-product': (context) => AddProductPage(),
-        '/main-customer': (conter) => MainCustomerPage(),
-        '/edit-name-phone': (conter) => EditNamePhoneNum(),
-        '/edit-password': (conter) => EditPasswordPage(),
-        '/edit-address': (conter) => EditAddressPage(),
-        '/view-product': (conter) => ViewProductPage(),
-        '/modify-banner': (conter) => ModifyBannerPage(),
-        '/order-list': (conter) => OrderListPage(),
-        '/payment-page': (conter) => PaymentPage(),
-        '/shopping-cart': (conter) => ShoppingCartPage(),
-        '/shopping-cartnull': (conter) => ShoppingCartNull(),
-        '/search-page': (conter) => SearchCustomerPage(),
-        '/wishlist-page': (conter) => WishlistPage(),
-      },
+    return ChangeNotifierProvider<Notifier>(
+      create: (context) => Notifier(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/': (context) => SplashPage(),
+          //Klo mau ganti route ke DetailPage, tulis "DetailPage()"
+          //Klo mau ganti route ke ViewProductPage, tulis "ViewProductPage()"
+          //biar gak perlu lagi nge cek tiap halaman buka dari halam splash page
+          '/sign-in': (context) => SignInPage(),
+          '/sign-up': (context) => SignUpPage(),
+          '/homescreen-admin': (context) => HomescreenAdminPage(),
+          '/add-product': (context) => AddProductPage(),
+          '/main-customer': (conter) => MainCustomerPage(),
+          '/edit-name-phone': (conter) => EditNamePhoneNum(),
+          '/edit-password': (conter) => EditPasswordPage(),
+          '/edit-address': (conter) => EditAddressPage(),
+          '/view-product': (conter) => ViewProductPage(),
+          '/modify-banner': (conter) => ModifyBannerPage(),
+          '/order-list': (conter) => OrderListPage(),
+          '/payment-page': (conter) => PaymentPage(),
+          '/shopping-cart': (conter) => ShoppingCartPage(),
+          '/shopping-cartnull': (conter) => ShoppingCartNull(),
+          '/search-page': (conter) => SearchCustomerPage(),
+          '/wishlist-page': (conter) => WishlistPage(),
+        },
+      ),
     );
   }
 }

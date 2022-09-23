@@ -16,8 +16,9 @@ dynamic routeConfig = {
 		},
 		"admin": {
 			"products": {
-				"create": "/admin/products",
+				"store": "/admin/products",
 				"index": "/admin/products",
+				"destroy": "/admin/products/:id",
 			}
 		}
 	}
