@@ -335,7 +335,7 @@ class _AddProductPageState extends State<AddProductPage> {
   void filePicker() async {
     final XFile? selectImage =
         await _picker.pickImage(source: ImageSource.gallery);
-    print(selectImage!.path);
+
     setState(() {
       image = selectImage;
     });
