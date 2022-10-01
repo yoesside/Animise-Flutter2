@@ -125,6 +125,41 @@ class Api {
     return this;
   }
 
+  Future<Api> put(endpoint, {data, options, contentType = 'application/json'}) async {
+    Dio dio = new Dio();
+
+    await Storage.getToken().then((token) async {
+
+      try {
+
+        dynamic headers = {
+          'Accept': 'application/json',
+          'Content-Type': contentType,
+        };
+
+        if (token != null) {
+          headers['Authorization'] = 'Bearer ' + token;
+        }
+
+        await dio.put(endpoint, data: data, options: Options(
+            headers: headers
+        )).then((response) {
+          if (successCallback != null) {
+            successCallback(response);
+          }
+        });
+
+      } on DioError catch(e) {
+        if (failedCallback != null) {
+          failedCallback(e);
+        }
+      }
+
+    });
+
+    return this;
+  }
+
   Api onSuccess({required Function onSuccess}) {
 
     this.successCallback = onSuccess;

@@ -1,10 +1,16 @@
 // ignore: unused_import
+import 'package:animise_application/services/admin/order_service.dart';
 import 'package:animise_application/theme/theme.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
 
 class ContainerProcessReject extends StatelessWidget {
+
+  int shippingId;
+
+  ContainerProcessReject(this.shippingId);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +27,9 @@ class ContainerProcessReject extends StatelessWidget {
           children: [
             InkWell(
               onTap: (){
+                var service = new OrderService(context);
 
+                service.updateOrder(shippingId, 'process');
               },
               child: Image.asset("assets/Process.png",
                 width: 52,

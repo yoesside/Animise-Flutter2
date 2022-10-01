@@ -24,6 +24,10 @@ dynamic routeConfig = {
 				"store": "/admin/banners",
 				"index": "/admin/banners",
 				"destroy": "/admin/banners/:id",
+			},
+			"orders": {
+				"index": "/admin/orders",
+				"update": "/admin/orders/:id",
 			}
 		}
 	}
