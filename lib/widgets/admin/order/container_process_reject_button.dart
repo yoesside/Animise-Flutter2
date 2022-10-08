@@ -41,7 +41,9 @@ class ContainerProcessReject extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                
+                var service = new OrderService(context);
+
+                service.updateOrder(shippingId, 'rejected');
               },
               child: Image.asset("assets/Reject.png",
                 width: 52,

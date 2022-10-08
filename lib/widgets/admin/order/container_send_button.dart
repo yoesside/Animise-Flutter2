@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../services/admin/order_service.dart';
+
 class ContainerSendButton extends StatelessWidget {
+
+  int shippingId;
+
+  ContainerSendButton(this.shippingId);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,9 @@ class ContainerSendButton extends StatelessWidget {
           children: [
             InkWell(
               onTap: (){
+                var service = new OrderService(context);
 
+                service.updateOrder(shippingId, 'send');
               },
               child: Image.asset("assets/Send.png",
                 width: 52,
