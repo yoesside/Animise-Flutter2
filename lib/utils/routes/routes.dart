@@ -12,6 +12,10 @@ dynamic routeConfig = {
 		"user": {
 			"products": {
 				"recommendation": "/products/recommendation"
+			},
+			"profile": {
+				"index": "/customer/biodatas",
+				"store": "/customer/biodatas",
 			}
 		},
 		"admin": {

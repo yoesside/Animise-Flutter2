@@ -1,13 +1,19 @@
 import 'package:animise_application/theme/theme.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
+import '../../../services/customer/profile_service.dart';
 
 class EditPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
 
+    TextEditingController password = new TextEditingController();
+
     Widget buildPassword() => TextField(
       obscureText: true,
+      controller: password,
       decoration: InputDecoration(
         labelText: "New Password",
         border: OutlineInputBorder(),
@@ -40,7 +46,14 @@ class EditPasswordPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 primary: primaryOrangeColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                var service = new ProfileService(context);
+                dynamic map = {
+                  'password': password.text,
+                };
+
+                service.update(FormData.fromMap(map));
+              },
             ),
           ],
         ),
