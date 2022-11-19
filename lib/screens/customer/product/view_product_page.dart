@@ -27,9 +27,9 @@ class ViewProductPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-          left: 30,
+          left: 17,
           top: 20,
-          right: 30,
+          right: 17,
         ),
         child: SafeArea(
           child: SingleChildScrollView(
@@ -40,7 +40,7 @@ class ViewProductPage extends StatelessWidget {
                   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
 
-                      var formatter = NumberFormat('#,##,000');
+                      var formatter = NumberFormat('#,###,000');
                       var products  = json.decode(snapshot.data.toString());
                       var columns   = _.chunk(products['data'], 2);
 

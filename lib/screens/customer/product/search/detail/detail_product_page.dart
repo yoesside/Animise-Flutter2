@@ -10,7 +10,7 @@ class DetailProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bodyBackgroundColor,
+      backgroundColor: textWhite,
       appBar: AppBar(
         title: Text("Detail product"),
         backgroundColor: primaryOrangeColor,
@@ -19,8 +19,8 @@ class DetailProductPage extends StatelessWidget {
         children: [
           Image.asset(
             "assets/PVC Figure 1-7 Ifrit - Arknights.png",
-            width: 415,
-            height: 415,
+            width: 390,
+            height: 380,
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -37,7 +37,7 @@ class DetailProductPage extends StatelessWidget {
                       height: 80,
                     ),
                     SizedBox(
-                      width: 190
+                      width: 170
                     ),
                     Container(
                       child: IconButton(
@@ -86,10 +86,10 @@ class DetailProductPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 80,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 250),
+                  padding: const EdgeInsets.only(left: 220),
                   child: Row(
                     children: [
                       ElevatedButton(

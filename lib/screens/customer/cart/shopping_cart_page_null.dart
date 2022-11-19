@@ -16,7 +16,7 @@ class ShoppingCartNull extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(
-              top: 110,
+              top: 160,
             ),
             child: Center(
               child: Image.asset("assets/chibi_ganyu.png",

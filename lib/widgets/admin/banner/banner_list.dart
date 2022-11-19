@@ -37,7 +37,7 @@ class BannerList extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 200,
+            width: 170,
           ),
           InkWell(onTap: () {
             Provider.of<Notifier>(context, listen: false).deleteBannerById(context, id);
