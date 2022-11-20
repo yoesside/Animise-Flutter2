@@ -16,6 +16,9 @@ dynamic routeConfig = {
 			"profile": {
 				"index": "/customer/biodatas",
 				"store": "/customer/biodatas",
+			},
+			"banners": {
+				"index": "/banners",
 			}
 		},
 		"admin": {
