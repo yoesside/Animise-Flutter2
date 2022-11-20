@@ -4,6 +4,7 @@ import 'package:animise_application/providers/state_notifier.dart';
 import 'package:animise_application/screens/admin/product/add_product_page.dart';
 // ignore: unused_import
 import 'package:animise_application/screens/admin/banner/modify_banner_page.dart';
+import 'package:animise_application/screens/customer/product/search/detail/detail_product_page.dart';
 import 'package:animise_application/screens/customer/product/view_product_page.dart';
 // ignore: unused_import
 
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
           '/shopping-cartnull': (conter) => ShoppingCartNull(),
           '/search-page': (conter) => SearchCustomerPage(),
           '/wishlist-page': (conter) => WishlistPage(),
+          '/detail-page': (conter) => DetailProductPage(),
         },
       ),
     );

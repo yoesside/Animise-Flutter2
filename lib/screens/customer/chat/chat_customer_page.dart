@@ -22,7 +22,7 @@ class ChatCustomerPage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: 81,
+                height: 110,
               ),
               Image.asset(
                 "assets/Umaru_Chat.png",
@@ -54,12 +54,12 @@ class ChatCustomerPage extends StatelessWidget {
 }
 
 openwhatsapp() {
-  // return launchUrl(
-  //   Uri.parse(
-  //     // 'https://wa.me/1234567890' //you use this url also
-  //     'whatsapp://send?phone=+6283147690333',//put your number here
-  //   ),
-  // );
+  return launchUrl(
+    Uri.parse(
+      // 'https://wa.me/1234567890' //you use this url also
+      'whatsapp://send?phone=+6283147690333',//put your number here
+    ),
+  );
 }
 //Gak mau ke open whatsapp nya
 

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:animise_application/theme/theme.dart';
 import 'package:animise_application/utils/routes/routes.dart';
 import 'package:animise_application/widgets/customer/home/container_product_home_mini.dart';
@@ -8,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../services/customer/banner_service.dart';
+
+import '../../../widgets/customer/product/container_search_product.dart';
 
 class HomeCustomerPage extends StatefulWidget {
   @override
@@ -71,8 +71,8 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
       backgroundColor: bodyBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.only(
-          top: 5,
-          left: 23,
+          top: 15,
+          left: 15,
           // right: 20,
         ),
         child: SafeArea(
@@ -130,12 +130,12 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                     // left: 20,
-                    right: 31,
+                    right: 20,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -256,12 +256,12 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
                     // left: 20,
-                    right: 31,
+                    right: 15,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -392,35 +392,35 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 15,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 31),
+                  padding: const EdgeInsets.only(right: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ProductList(
-                        imageProduct:
-                            "assets/PVC Figure 1-7 Ch'en Arknights.png",
-                        imagePreorder_Ready: "assets/Ready Stock.png",
-                        nameProduct: "PVC Figure 1/7 Ch'en Arknights",
-                        price: "IDR 2,300,000",
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/detail-page");
+                        },
+                        child: ContainerProduct(
+                            imageProduct:
+                                "assets/PVC Figure 1-7 Ch'en Arknights.png",
+                            imagePreorder_Ready: "assets/Ready Stock.png",
+                            nameProduct: "PVC Figure 1/7 Ch'en Arknights",
+                            price: "IDR 2,300,000"),
                       ),
-                      ProductList(
-                        imageProduct:
-                            "assets/PVC Figure 1-7 Sorasaki Hina - Blue Archive.png",
-                        imagePreorder_Ready: "assets/Pre-Order.png",
-                        nameProduct:
-                            "PVC Figure 1/7 Sorasaki Hina - Blue Archive",
-                        price: "IDR 4,100,000",
-                      ),
-                      ProductList(
-                        imageProduct:
-                            "assets/Nendoroid Gawr Gura - Hololive Production.png",
-                        imagePreorder_Ready: "assets/Ready Stock.png",
-                        nameProduct:
-                            "Nendoroid Gawr Gura - Hololive Production",
-                        price: "IDR 860,000",
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/detail-page");
+                        },
+                        child: ContainerProduct(
+                            imageProduct:
+                                "assets/PVC Figure 1-7 Sorasaki Hina - Blue Archive.png",
+                            imagePreorder_Ready: "assets/Pre-Order.png",
+                            nameProduct:
+                                "PVC Figure 1/7 Sorasaki Hina - Blue Archive",
+                            price: "IDR 4,100,000"),
                       ),
                     ],
                   ),

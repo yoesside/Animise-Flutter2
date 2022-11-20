@@ -56,7 +56,7 @@ class _AddProductPageState extends State<AddProductPage> {
                     ),
                   ),
                   SizedBox(
-                    width: 175,
+                    width: 145,
                   ),
                   TextButton(
                       onPressed: () {
@@ -216,7 +216,7 @@ class _AddProductPageState extends State<AddProductPage> {
               Row(
                 children: [
                   Text(
-                    "Active Pre-order",
+                    "Active Ready Stock",
                     style: primaryTextStyle.copyWith(
                       fontSize: 14,
                       fontWeight: bold,
@@ -230,7 +230,7 @@ class _AddProductPageState extends State<AddProductPage> {
                   ),
                 ),
                   SizedBox(
-                    width: 186,
+                    width: 140,
                   ),
                   Switch(
                     value: activePreOrderSwitch,
@@ -286,7 +286,7 @@ class _AddProductPageState extends State<AddProductPage> {
               Row(
                 children: [
                   SizedBox(
-                    width: 240,
+                    width: 200,
                   ),
                   ElevatedButton(
                     child: Text(

@@ -24,7 +24,7 @@ class _SearchCustomerPageState extends State<SearchCustomerPage> {
                   "Search Product",
                 ),
                 SizedBox(
-                  width: 210,
+                  width: 190,
                 ),
                 InkWell(
                     onTap: () {
@@ -35,9 +35,9 @@ class _SearchCustomerPageState extends State<SearchCustomerPage> {
             )),
         body: Padding(
           padding: const EdgeInsets.only(
-            left: 30,
-            top: 20,
-            right: 30,
+            left: 17,
+            top: 17,
+            right: 17,
           ),
           child: SafeArea(
               child: SingleChildScrollView(
@@ -46,37 +46,57 @@ class _SearchCustomerPageState extends State<SearchCustomerPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ContainerProduct(
-                        imageProduct:"assets/PVC Figure 1-7 Blaze - Arknights.png",
-                        imagePreorder_Ready: "assets/Ready Stock.png",
-                        nameProduct: "PVC Figure 1/7 Blaze - Arknights",
-                        price: "IDR 2,850,000"),
-                    ContainerProduct(
-                        imageProduct:
-                            "assets/PVC Figure 1-7 Ifrit - Arknights.png",
-                        imagePreorder_Ready: "assets/Pre-Order.png",
-                        nameProduct: "PVC Figure 1/7 Ifrit - Arknights",
-                        price: "IDR 3,200,000"), 
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, "/detail-page");
+                      },
+                      child: ContainerProduct(
+                          imageProduct:"assets/PVC Figure 1-7 Blaze - Arknights.png",
+                          imagePreorder_Ready: "assets/Ready Stock.png",
+                          nameProduct: "PVC Figure 1/7 Blaze - Arknights",
+                          price: "IDR 2,850,000"),
+                    ),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, "/detail-page");
+                      },
+                      child: ContainerProduct(
+                          imageProduct:
+                              "assets/PVC Figure 1-7 Ifrit - Arknights.png",
+                          imagePreorder_Ready: "assets/Pre-Order.png",
+                          nameProduct: "PVC Figure 1/7 Ifrit - Arknights",
+                          price: "IDR 3,200,000"),
+                    ), 
                   ],
                 ),
                 
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ContainerProduct(
-                        imageProduct:"assets/PVC Figure 1-7 Texas Arknights.png",
-                        imagePreorder_Ready: "assets/Pre-Order.png",
-                        nameProduct: "PVC Figure 1/7 Texas Arknights",
-                        price: "IDR 2,820,000"),
-                    ContainerProduct(
-                        imageProduct:
-                            "assets/Nendoroid Lappland - Arknights.png",
-                        imagePreorder_Ready: "assets/Pre-Order.png",
-                        nameProduct: "Nendoroid Lappland - Arknights",
-                        price: "IDR 880,000"), 
+                    InkWell(
+                      onTap: (() {
+                        Navigator.pushNamed(context, "/detail-page");
+                      }),
+                      child: ContainerProduct(
+                          imageProduct:"assets/PVC Figure 1-7 Texas Arknights.png",
+                          imagePreorder_Ready: "assets/Pre-Order.png",
+                          nameProduct: "PVC Figure 1/7 Texas Arknights",
+                          price: "IDR 2,820,000"),
+                    ),
+                    InkWell(
+                      onTap: (() {
+                        Navigator.pushNamed(context, "/detail-page");
+                      }),
+                      child: ContainerProduct(
+                          imageProduct:
+                              "assets/Nendoroid Lappland - Arknights.png",
+                          imagePreorder_Ready: "assets/Pre-Order.png",
+                          nameProduct: "Nendoroid Lappland - Arknights",
+                          price: "IDR 880,000"),
+                    ), 
                   ],
                 ),
               ],
