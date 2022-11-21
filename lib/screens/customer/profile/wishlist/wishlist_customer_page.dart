@@ -33,12 +33,16 @@ class WishlistPage extends StatelessWidget {
                         imageProduct: "assets/PVC Figure 1-7 Blaze - Arknights.png",
                         imagePreorder_Ready: "assets/Ready Stock.png",
                         nameProduct: "PVC Figure 1/7 Blaze - Arknights",
-                        price: "IDR 2,850,000"),
+                        price: "IDR 2,850,000",
+                        id: '2',
+                    ),
                     ContainerProduct(
                         imageProduct: "assets/PVC Figure 1-7 Ifrit - Arknights.png",
                         imagePreorder_Ready: "assets/Pre-Order.png",
                         nameProduct: "PVC Figure 1/7 Ifrit - Arknights",
-                        price: "IDR 3,200,000"),
+                        price: "IDR 3,200,000",
+                        id: '2',
+                    ),
                   ],
                 ),
                 

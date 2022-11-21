@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:animise_application/theme/theme.dart';
 import 'package:animise_application/utils/routes/routes.dart';
 import 'package:animise_application/widgets/customer/home/container_product_home_mini.dart';
@@ -142,7 +144,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/search-page');
+                          Navigator.pushNamed(context, '/search-page', arguments: 1);
                         },
                         child: Container(
                           width: 75,
@@ -170,7 +172,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/search-page');
+                          Navigator.pushNamed(context, '/search-page', arguments: 2);
                         },
                         child: Container(
                           width: 75,
@@ -198,7 +200,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/search-page');
+                          Navigator.pushNamed(context, '/search-page', arguments: 3);
                         },
                         child: Container(
                           width: 75,
@@ -226,7 +228,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/search-page');
+                          Navigator.pushNamed(context, '/search-page', arguments: 4);
                         },
                         child: Container(
                           width: 75,
@@ -268,7 +270,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/search-page');
+                          Navigator.pushNamed(context, '/search-page', arguments: 5);
                         },
                         child: Container(
                           width: 75,
@@ -296,7 +298,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/search-page');
+                          Navigator.pushNamed(context, '/search-page', arguments: 6);
                         },
                         child: Container(
                           width: 75,
@@ -324,7 +326,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/search-page');
+                          Navigator.pushNamed(context, '/search-page', arguments: 7);
                         },
                         child: Container(
                           width: 75,
@@ -352,7 +354,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/search-page');
+                          Navigator.pushNamed(context, '/search-page', arguments: 8);
                         },
                         child: Container(
                           width: 75,
@@ -408,7 +410,9 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                                 "assets/PVC Figure 1-7 Ch'en Arknights.png",
                             imagePreorder_Ready: "assets/Ready Stock.png",
                             nameProduct: "PVC Figure 1/7 Ch'en Arknights",
-                            price: "IDR 2,300,000"),
+                            price: "IDR 2,300,000",
+                            id: '1',
+                        ),
                       ),
                       InkWell(
                         onTap: () {
@@ -420,7 +424,9 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                             imagePreorder_Ready: "assets/Pre-Order.png",
                             nameProduct:
                                 "PVC Figure 1/7 Sorasaki Hina - Blue Archive",
-                            price: "IDR 4,100,000"),
+                            price: "IDR 4,100,000",
+                            id: '1',
+                        ),
                       ),
                     ],
                   ),

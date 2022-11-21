@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 class Api {
   late Function successCallback, failedCallback;
 
-  Future futureGet(endpoint, {data, options, contentType = 'application/json'}) async {
+  Future futureGet(endpoint, {data, options, contentType = 'application/json', queryParameters}) async {
     Dio dio = new Dio();
 
     return Storage.getToken().then((token) async {
@@ -17,9 +17,15 @@ class Api {
         headers['Authorization'] = 'Bearer ' + token;
       }
 
+      if (queryParameters == null) {
+        return await dio.get(endpoint, options: Options(
+            headers: headers
+        ));
+      }
+
       return await dio.get(endpoint, options: Options(
           headers: headers
-      ));
+      ), queryParameters: queryParameters);
     });
   }
 

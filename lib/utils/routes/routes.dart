@@ -2,7 +2,7 @@ import 'dart:io';
 
 dynamic routeConfig = {
 	// change this base url manually
-	"baseUrl": "http://192.168.1.5:8000/api",
+	"baseUrl": "http://10.0.2.2:8000/api",
 	"version": "v1",
 	"endpoints": {
 		"auth": {
@@ -11,7 +11,8 @@ dynamic routeConfig = {
 		},
 		"user": {
 			"products": {
-				"recommendation": "/products/recommendation"
+				"recommendation": "/products/recommendation",
+				"show": "/products/:id",
 			},
 			"profile": {
 				"index": "/customer/biodatas",
@@ -19,6 +20,9 @@ dynamic routeConfig = {
 			},
 			"banners": {
 				"index": "/banners",
+			},
+			"search": {
+				"index": "/search",
 			}
 		},
 		"admin": {

@@ -10,6 +10,7 @@ class ContainerProduct extends StatelessWidget {
   String nameProduct;
   // String category;
   String price;
+  var id;
   // String realeses;
   // String estimated_arrival;
 
@@ -19,6 +20,7 @@ class ContainerProduct extends StatelessWidget {
       required this.nameProduct,
       // required this.category,
       required this.price,
+      required this.id,
       // required this.realeses,
       // required this.estimated_arrival
   });
