@@ -23,6 +23,10 @@ dynamic routeConfig = {
 			},
 			"search": {
 				"index": "/search",
+			},
+			"carts": {
+				"index": "/carts",
+				"store": "/carts",
 			}
 		},
 		"admin": {

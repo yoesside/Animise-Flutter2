@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:animise_application/services/customer/cart_service.dart';
 import 'package:animise_application/theme/theme.dart';
 // ignore: unused_import
 import 'package:flutter/material.dart';
@@ -17,8 +18,6 @@ class DetailProductPage extends StatelessWidget {
 
     var id      = ModalRoute.of(context)?.settings.arguments;
     var service = new ProductService(context);
-
-    print(service.a(id.toString()));
 
     return Scaffold(
       backgroundColor: textWhite,
@@ -106,14 +105,22 @@ class DetailProductPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 80,
+                        height: 0,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 220),
                         child: Row(
                           children: [
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                var data = {
+                                  'product_id': id,
+                                  'quantity': 1,
+                                };
+
+                                var cartService = new CartService(context);
+                                cartService.store(data);
+                              },
                               child: Text(
                                 "Add to Cart",
                                 style: GoogleFonts.montserrat(
