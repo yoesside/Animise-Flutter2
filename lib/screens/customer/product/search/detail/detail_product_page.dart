@@ -113,13 +113,8 @@ class DetailProductPage extends StatelessWidget {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                var data = {
-                                  'product_id': id,
-                                  'quantity': 1,
-                                };
-
                                 var cartService = new CartService(context);
-                                cartService.store(data);
+                                cartService.store(id);
                               },
                               child: Text(
                                 "Add to Cart",

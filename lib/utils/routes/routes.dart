@@ -27,6 +27,7 @@ dynamic routeConfig = {
 			"carts": {
 				"index": "/carts",
 				"store": "/carts",
+				"destroy": "/carts/:id",
 			}
 		},
 		"admin": {

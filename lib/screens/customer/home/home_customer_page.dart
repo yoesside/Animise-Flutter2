@@ -1,5 +1,7 @@
+import 'dart:collection';
 import 'dart:convert';
 
+import 'package:animise_application/services/customer/cart_service.dart';
 import 'package:animise_application/theme/theme.dart';
 import 'package:animise_application/utils/routes/routes.dart';
 import 'package:animise_application/widgets/customer/home/container_product_home_mini.dart';
@@ -63,7 +65,26 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
               ),
               InkWell(
                 onTap: (){
-                  Navigator.pushNamed(context, '/shopping-cart');
+                  var cartService = new CartService(context);
+
+                  cartService.retrieve().then((value) {
+
+                    var carts = json.decode(value.toString());
+                    var total = 0;
+
+                    carts['data'].forEach((cart) {
+                      total += (cart['product']['price'] as int) * (cart['quantity'] as int);
+                    });
+
+                    if (carts['data'].length == 0) {
+                      Navigator.pushNamed(context, '/shopping-cartnull');
+                    } else {
+                      Navigator.pushNamed(context, '/shopping-cart', arguments: {
+                        'total': total,
+                      });
+                    }
+                  });
+
                 },
                 child: Icon(Icons.shopping_cart))
             ],

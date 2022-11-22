@@ -1,24 +1,38 @@
+import 'dart:convert';
+
+import 'package:animise_application/screens/customer/cart/shopping_cart_page.dart';
+import 'package:animise_application/services/customer/cart_service.dart';
 import 'package:animise_application/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// ignore: must_be_immutable
-class ContainerShoppingCart extends StatelessWidget {
+class ContainerShoppingCart extends StatefulWidget {
+
   String imageProduct;
   String imagePreorder_Ready;
   String nameProduct;
   // String category;
   String price;
- 
+  String id;
 
-  ContainerShoppingCart(
-      {required this.imageProduct,
-      required this.imagePreorder_Ready,
-      required this.nameProduct,
-      // required this.category,
-      required this.price,
-      
-      });
+  String cart_id;
+
+  int quantity;
+
+  ContainerShoppingCart(this.cart_id, this.id, this.quantity, {
+    required this.imageProduct,
+    required this.imagePreorder_Ready,
+    required this.nameProduct,
+    // required this.category,
+    required this.price,
+  });
+
+  @override
+  State<StatefulWidget> createState() => _ContainerShoppingCart();
+}
+
+// ignore: must_be_immutable
+class _ContainerShoppingCart extends State<ContainerShoppingCart> {
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +52,8 @@ class ContainerShoppingCart extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
-                  imageProduct,
+                child: Image.network(
+                  widget.imageProduct,
                   width: 110,
                   height: 110,
                 ),
@@ -53,7 +67,7 @@ class ContainerShoppingCart extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      nameProduct,
+                      widget.nameProduct,
                       maxLines: 2,
                       style: GoogleFonts.montserrat(
                         color: textBlack,
@@ -62,7 +76,7 @@ class ContainerShoppingCart extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      price,
+                      widget.price,
                       style: GoogleFonts.montserrat(
                         color: primaryOrangeColor,
                         fontSize: 14,
@@ -79,30 +93,63 @@ class ContainerShoppingCart extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Image.asset("assets/minus_button.png",
-                           width: 20,
-                          height: 20,
+                        InkWell(
+                          child: Image.asset("assets/minus_button.png",
+                            width: 20,
+                            height: 20,
+                          ),
+                          onTap: () {
+                            setState(() {
+                              --widget.quantity;
+
+                              var service = new CartService(context);
+                              service.store(widget.id, quantity: widget.quantity, withAlert: false, onSuccess: () {
+                                reloadPage();
+                              });
+                            });
+                          },
                         ),
                         SizedBox(
                           width: 20,
                         ),
-                        Text("1",style: GoogleFonts.montserrat(
+                        Text(widget.quantity.toString(), style: GoogleFonts.montserrat(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),),
                          SizedBox(
                           width: 20,
                         ),
-                        Image.asset("assets/plus_button.png",
-                           width: 20,
-                          height: 20,
+                        InkWell(
+                          child: Image.asset("assets/plus_button.png",
+                            width: 20,
+                            height: 20,
+                          ),
+                          onTap: () {
+                            setState(() {
+                              ++widget.quantity;
+
+                              var service = new CartService(context);
+                              service.store(widget.id, quantity: widget.quantity, withAlert: false, onSuccess: () {
+                                reloadPage();
+                              });
+                            });
+                          },
                         ),
                          SizedBox(
                           width: 20,
                         ),
-                        Image.asset("assets/Delete.png",
-                          width: 20,
-                          height: 20,
+                        InkWell(
+                          child: Image.asset("assets/Delete.png",
+                            width: 20,
+                            height: 20,
+                          ),
+                          onTap: () {
+                            var service = new CartService(context);
+
+                            service.delete(widget.cart_id).then((value) {
+                              reloadPage();
+                            });
+                          },
                         ),
                       ],
                     )
@@ -113,5 +160,30 @@ class ContainerShoppingCart extends StatelessWidget {
           ),
         ),
     ));
+  }
+
+  void reloadPage() {
+    var service = new CartService(context);
+
+    service.retrieve().then((value) {
+      var carts = json.decode(value.toString());
+      var t = 0;
+
+      carts['data'].forEach((cart) {
+        t += (cart['product']['price'] as int) * (cart['quantity'] as int);
+      });
+
+      Navigator.pop(context);
+      if (carts['data'].length == 0) {
+        Navigator.pushNamed(context, '/shopping-cartnull');
+      } else {
+        Navigator.of(context).push(PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return ShoppingCartPage(total: t,);
+          },
+          transitionDuration: Duration(seconds: 0),
+        ));
+      }
+    });
   }
 }

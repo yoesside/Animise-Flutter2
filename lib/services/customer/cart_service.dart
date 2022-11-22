@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 
 import '../../utils/helpers/routes/path_parameter.dart';
 import '../../utils/helpers/routes/routes_generator.dart';
@@ -16,18 +15,60 @@ class CartService {
 
   CartService(this.context);
 
-  void store(data) {
+  Future retrieve() {
+    var api = new Api();
+    var generator = new RouteGenerator();
+
+    generator.noVersion();
+    generator.setEndpoint(generateUrlFromBaseUrl(routeConfig['endpoints']['user']['carts']['index']), new List<PathParameter>.empty());
+
+    return api.futureGet(generator.getFullEndpointUrl());
+  }
+
+  Future delete(id) async {
+    var api = new Api();
+    var generator = new RouteGenerator();
+
+    List<PathParameter> lists = new List<PathParameter>.empty(growable: true);
+    lists.add(new PathParameter('id', id));
+
+    generator.noVersion();
+    generator.setEndpoint(generateUrlFromBaseUrl(routeConfig['endpoints']['user']['carts']['destroy']), lists);
+
+    api.onSuccess(onSuccess: (response) {
+      print(response);
+    });
+
+    api.onFailed(onFailed: (DioError error) {
+      print(generator.getFullEndpointUrl());
+    });
+
+    return api.delete(generator.getFullEndpointUrl());
+  }
+
+  void store(id, {quantity = 1, withAlert = true, message = 'Berhasil memasukkan ke keranjang', onSuccess}) {
     var api = new Api();
     var generator = new RouteGenerator();
 
     generator.noVersion();
     generator.setEndpoint(generateUrlFromBaseUrl(routeConfig['endpoints']['user']['carts']['store']), new List<PathParameter>.empty());
 
-    api.post(generator.getFullEndpointUrl(), data: data);
+    api.post(generator.getFullEndpointUrl(), data: {
+      'product_id': id,
+      'quantity': quantity,
+    });
 
     api.onSuccess(onSuccess: (response) {
       if (response.statusCode == HttpStatus.noContent) {
-        fireAlert(context, Text('Berhasil memasukkan ke keranjang'), title: 'Success!');
+
+        if (withAlert) {
+          fireAlert(context, Text(message), title: 'Success!');
+        }
+
+        if (onSuccess != null) {
+          onSuccess();
+        }
+
       }
     });
 
