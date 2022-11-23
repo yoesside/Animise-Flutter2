@@ -1,8 +1,20 @@
+import 'package:animise_application/services/customer/payment_service.dart';
 import 'package:animise_application/theme/theme.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
-class PaymentPage extends StatelessWidget {
+class PaymentPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _PaymentPage();
+}
+
+class _PaymentPage extends State<PaymentPage> {
+
+  XFile? image;
+  final ImagePicker _picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +71,10 @@ class PaymentPage extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
-                TextButton(onPressed: (){}, 
+                TextButton(
+                  onPressed: (){
+                    filePicker(context);
+                  },
                   child: Text("Add Photo",style: GoogleFonts.montserrat(
                     color: Color(0xffFF5C00),
                     fontWeight: FontWeight.w600,
@@ -86,7 +101,18 @@ class PaymentPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         primary: primaryOrangeColor,
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+
+                        dynamic map = {
+                          'proof': image == null ? '' : await MultipartFile.fromFile(image!.path, filename: image?.name),
+                        };
+
+                        var formData = FormData.fromMap(map);
+
+                        var service = new PaymentService(context);
+
+                        service.upload(formData);
+                      },
                     ),
             ),
           ],
@@ -94,5 +120,13 @@ class PaymentPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void filePicker(BuildContext context) async {
+    final XFile? selectImage = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      image = selectImage;
+    });
   }
 }
