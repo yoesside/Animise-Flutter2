@@ -44,7 +44,7 @@ class ContainerOrderStatus extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
+                child: Image.network(
                   imageProduct,
                   width: 110,
                   height: 110,
