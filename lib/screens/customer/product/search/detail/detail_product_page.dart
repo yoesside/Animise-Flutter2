@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:animise_application/services/customer/cart_service.dart';
+import 'package:animise_application/services/customer/wishlist_service.dart';
 import 'package:animise_application/theme/theme.dart';
+import 'package:dio/dio.dart';
 // ignore: unused_import
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,15 +11,35 @@ import 'package:intl/intl.dart';
 
 import '../../../../../services/customer/product_service.dart';
 
+class DetailProductPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _DetailProductPage();
+
+}
+
 // ignore: must_be_immutable
-class DetailProductPage extends StatelessWidget {
-  bool _isLikeButtonClicked = true;//change true or false
+class _DetailProductPage extends State<DetailProductPage> {
+  bool _isLikeButtonClicked = true;
+  bool _isFirstRender = false;
 
   @override
   Widget build(BuildContext context) {
 
     var id      = ModalRoute.of(context)?.settings.arguments;
     var service = new ProductService(context);
+
+    var wishlistService = new WishlistService(context);
+
+    if (!_isFirstRender) {
+      wishlistService.show(id.toString()).then((value) {
+        var data = json.decode(value.toString());
+
+        setState(() {
+          _isFirstRender = true;
+          _isLikeButtonClicked = data['data'].length > 0;
+        });
+      });
+    }
 
     return Scaffold(
       backgroundColor: textWhite,
@@ -60,17 +82,22 @@ class DetailProductPage extends StatelessWidget {
                           ),
                           Container(
                             child: IconButton(
-                              icon: _isLikeButtonClicked
-                                  ? Icon(Icons.favorite)
-                                  : Icon(Icons.favorite_outline),
-                              color: _isLikeButtonClicked ? Colors.red : Colors.black,
-                              onPressed: (){
+                                icon: _isLikeButtonClicked
+                                ? Icon(Icons.favorite)
+                                    : Icon(Icons.favorite_outline),
+                                color: _isLikeButtonClicked ? Colors.red : Colors.black,
+                                onPressed: () {
+                                  var data = {
+                                    'product_id': id,
+                                  };
 
-                                setState((){
-                                  _isLikeButtonClicked = !_isLikeButtonClicked;
-                                });
-                              }
-                              ,),
+                                  wishlistService.store(FormData.fromMap(data));
+
+                                  setState(() {
+                                    _isLikeButtonClicked = !_isLikeButtonClicked;
+                                  });
+                                },
+                            ),
                           ),
                         ],
                       ),
@@ -140,6 +167,4 @@ class DetailProductPage extends StatelessWidget {
       ),
     );
   }
-
-  void setState(Null Function() param0) {}
 }

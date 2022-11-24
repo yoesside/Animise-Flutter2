@@ -32,6 +32,11 @@ dynamic routeConfig = {
 			},
 			"orders": {
 				"index": "/orders",
+			},
+			"wishlists": {
+				"index": "/wishlists",
+				"store": "/wishlists",
+				"show": "/wishlists/product/:id",
 			}
 		},
 		"admin": {

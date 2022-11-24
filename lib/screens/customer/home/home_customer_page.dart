@@ -2,12 +2,14 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:animise_application/services/customer/cart_service.dart';
+import 'package:animise_application/services/customer/wishlist_service.dart';
 import 'package:animise_application/theme/theme.dart';
 import 'package:animise_application/utils/routes/routes.dart';
 import 'package:animise_application/widgets/customer/home/container_product_home_mini.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../../../services/customer/banner_service.dart';
 
@@ -22,6 +24,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
   @override
   Widget build(BuildContext context) {
     BannerService bannerService = new BannerService(context);
+    WishlistService wishlistService = new WishlistService(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -419,37 +422,46 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/detail-page");
-                        },
-                        child: ContainerProduct(
-                            imageProduct:
-                                "assets/PVC Figure 1-7 Ch'en Arknights.png",
-                            imagePreorder_Ready: "assets/Ready Stock.png",
-                            nameProduct: "PVC Figure 1/7 Ch'en Arknights",
-                            price: "IDR 2,300,000",
-                            id: '1',
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/detail-page");
-                        },
-                        child: ContainerProduct(
-                            imageProduct:
-                                "assets/PVC Figure 1-7 Sorasaki Hina - Blue Archive.png",
-                            imagePreorder_Ready: "assets/Pre-Order.png",
-                            nameProduct:
-                                "PVC Figure 1/7 Sorasaki Hina - Blue Archive",
-                            price: "IDR 4,100,000",
-                            id: '1',
-                        ),
-                      ),
-                    ],
+                  child: FutureBuilder(
+                    future: wishlistService.retrieve(),
+                    builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+
+                      if (snapshot.connectionState == ConnectionState.done) {
+
+                        var wishlists = json.decode(snapshot.data.toString());
+
+                        if (wishlists['data'].length == 0) {
+                          return Text('no data');
+                        }
+
+                        List<Widget> widgets = new List<Widget>.empty(growable: true);
+                        var formatter = NumberFormat('#,###,000');
+
+                        wishlists['data'].forEach((wishlist) {
+                            widgets.add(
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, "/detail-page", arguments: wishlist['product']['id']);
+                                  },
+                                  child: ContainerProduct(
+                                    imageProduct: wishlist['product']['image_url'],
+                                    imagePreorder_Ready: wishlist['product']['pre_order'] == 1 ? "assets/Pre-Order.png" : "assets/Ready Stock.png",
+                                    nameProduct: wishlist['product']['name'],
+                                    price: "IDR " + formatter.format(wishlist['product']['price']),
+                                    id: wishlist['product']['id'],
+                                  ),
+                                )
+                            );
+                        });
+
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: widgets,
+                        );
+                      }
+
+                      return Text('wait a minute');
+                    },
                   ),
                 )
               ],
