@@ -41,7 +41,7 @@ class ContainerProduct extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
+            Image.network(
               imageProduct,
               width: 140,
               height: 140,

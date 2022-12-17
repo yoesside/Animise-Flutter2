@@ -21,6 +21,9 @@ class HomeCustomerPage extends StatefulWidget {
 }
 
 class _HomeCustomerPageState extends State<HomeCustomerPage> {
+
+  TextEditingController search = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     BannerService bannerService = new BannerService(context);
@@ -43,6 +46,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                 width: 360,
                 height: 40,
                 child: TextFormField(
+                  controller: search,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(
                         top: 11,
@@ -57,9 +61,16 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       hintStyle: GoogleFonts.montserrat(
                         color: primaryOrangeColor,
                       ),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: primaryOrangeColor,
+                      prefixIcon: InkWell(
+                        child: Icon(
+                          Icons.search,
+                          color: primaryOrangeColor,
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/search-page', arguments: {
+                            'name': search.text
+                          });
+                        },
                       )),
                 ),
               )),

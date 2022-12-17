@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:animise_application/services/customer/search_product_service.dart';
@@ -19,8 +20,19 @@ class _SearchCustomerPageState extends State<SearchCustomerPage> {
   @override
   Widget build(BuildContext context) {
 
-    var category = ModalRoute.of(context)?.settings.arguments;
+    dynamic category = ModalRoute.of(context)?.settings.arguments;
     var service  = new SearchProductService(context);
+
+    var c, n = '';
+
+    print(category.runtimeType);
+    print(category.runtimeType == dynamic);
+
+    if (category.runtimeType == int) {
+      c = category;
+    } else {
+      n = category['name'];
+    }
 
     return Scaffold(
         backgroundColor: bodyBackgroundColor,
@@ -51,7 +63,7 @@ class _SearchCustomerPageState extends State<SearchCustomerPage> {
           child: SafeArea(
               child: SingleChildScrollView(
             child: FutureBuilder(
-                future: service.retrieve(),
+                future: service.retrieve(name: n, category: c),
                 builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
 
                   if (snapshot.connectionState == ConnectionState.done) {
