@@ -58,102 +58,104 @@ class _ContainerShoppingCart extends State<ContainerShoppingCart> {
                   height: 110,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 15,
-                  top: 5,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.nameProduct,
-                      maxLines: 2,
-                      style: GoogleFonts.montserrat(
-                        color: textBlack,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      widget.price,
-                      style: GoogleFonts.montserrat(
-                        color: primaryOrangeColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Image.asset(
-                      "assets/Ready Stock.png",
-                      width: 70,
-                      height: 18,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        InkWell(
-                          child: Image.asset("assets/minus_button.png",
-                            width: 20,
-                            height: 20,
-                          ),
-                          onTap: () {
-                            setState(() {
-                              --widget.quantity;
-
-                              var service = new CartService(context);
-                              service.store(widget.id, quantity: widget.quantity, withAlert: false, onSuccess: () {
-                                reloadPage();
-                              });
-                            });
-                          },
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    top: 5,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.nameProduct,
+                        maxLines: 2,
+                        style: GoogleFonts.montserrat(
+                          color: textBlack,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(widget.quantity.toString(), style: GoogleFonts.montserrat(
+                      ),
+                      Text(
+                        widget.price,
+                        style: GoogleFonts.montserrat(
+                          color: primaryOrangeColor,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                        ),),
-                         SizedBox(
-                          width: 20,
                         ),
-                        InkWell(
-                          child: Image.asset("assets/plus_button.png",
-                            width: 20,
-                            height: 20,
+                      ),
+                      Image.asset(
+                        "assets/Ready Stock.png",
+                        width: 70,
+                        height: 18,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          InkWell(
+                            child: Image.asset("assets/minus_button.png",
+                              width: 20,
+                              height: 20,
+                            ),
+                            onTap: () {
+                              setState(() {
+                                --widget.quantity;
+              
+                                var service = new CartService(context);
+                                service.store(widget.id, quantity: widget.quantity, withAlert: false, onSuccess: () {
+                                  reloadPage();
+                                });
+                              });
+                            },
                           ),
-                          onTap: () {
-                            setState(() {
-                              ++widget.quantity;
-
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(widget.quantity.toString(), style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                           SizedBox(
+                            width: 20,
+                          ),
+                          InkWell(
+                            child: Image.asset("assets/plus_button.png",
+                              width: 20,
+                              height: 20,
+                            ),
+                            onTap: () {
+                              setState(() {
+                                ++widget.quantity;
+              
+                                var service = new CartService(context);
+                                service.store(widget.id, quantity: widget.quantity, withAlert: false, onSuccess: () {
+                                  reloadPage();
+                                });
+                              });
+                            },
+                          ),
+                           SizedBox(
+                            width: 20,
+                          ),
+                          InkWell(
+                            child: Image.asset("assets/Delete.png",
+                              width: 20,
+                              height: 20,
+                            ),
+                            onTap: () {
                               var service = new CartService(context);
-                              service.store(widget.id, quantity: widget.quantity, withAlert: false, onSuccess: () {
+              
+                              service.delete(widget.cart_id).then((value) {
                                 reloadPage();
                               });
-                            });
-                          },
-                        ),
-                         SizedBox(
-                          width: 20,
-                        ),
-                        InkWell(
-                          child: Image.asset("assets/Delete.png",
-                            width: 20,
-                            height: 20,
+                            },
                           ),
-                          onTap: () {
-                            var service = new CartService(context);
-
-                            service.delete(widget.cart_id).then((value) {
-                              reloadPage();
-                            });
-                          },
-                        ),
-                      ],
-                    )
-                  ],
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               )
             ],

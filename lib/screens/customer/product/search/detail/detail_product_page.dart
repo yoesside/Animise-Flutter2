@@ -73,7 +73,7 @@ class _DetailProductPage extends State<DetailProductPage> {
                       Row(
                         children: [
                           Image.asset(
-                            product['data']['pre_order'] ? "assets/Pre-Order.png" : "assets/Ready Stock.png",
+                            product['data']['pre_order'] ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
                             width: 140,
                             height: 80,
                           ),
@@ -132,7 +132,7 @@ class _DetailProductPage extends State<DetailProductPage> {
                         ),
                       ),
                       SizedBox(
-                        height: 0,
+                        height: 70,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 220),

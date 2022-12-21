@@ -25,9 +25,9 @@ class _SplashPageState extends State<SplashPage> {
         if (role == null) {
           Navigator.pushReplacementNamed(context, '/sign-in');
         } else if (role == User.USER_ROLE_ADMIN) {
-          Navigator.pushReplacementNamed(context, '/homescreen-admin');
+          Navigator.pushReplacementNamed(context, '/sign-in');
         } else {
-          Navigator.pushReplacementNamed(context, '/main-customer');
+          Navigator.pushReplacementNamed(context, '/sign-in');
         }
       });
 

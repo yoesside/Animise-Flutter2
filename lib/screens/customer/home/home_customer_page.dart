@@ -137,7 +137,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                                 child: Image.network(
                                   banner['image'],
                                   width: 360,
-                                  height: 150,
+                                  height: 200,
                                 ),
                               ),
                             )
@@ -159,6 +159,9 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                     },
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   "Categories",
                   style: GoogleFonts.montserrat(
@@ -167,7 +170,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -419,7 +422,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 Text(
                   "Most liked",
@@ -429,7 +432,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 15),
