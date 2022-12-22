@@ -25,9 +25,6 @@ class _SearchCustomerPageState extends State<SearchCustomerPage> {
 
     var c, n = '';
 
-    print(category.runtimeType);
-    print(category.runtimeType == dynamic);
-
     if (category.runtimeType == int) {
       c = category;
     } else {
@@ -86,7 +83,7 @@ class _SearchCustomerPageState extends State<SearchCustomerPage> {
                               },
                               child: ContainerProduct(
                                   imageProduct: row['image_url'],
-                                  imagePreorder_Ready: row['pre_order'] == 1 ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
+                                  imagePreorder_Ready: row['pre_order'] == false ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
                                   nameProduct: row['name'],
                                   price: "IDR " + formatter.format(row['price']),
                                   id: row['id'],

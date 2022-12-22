@@ -77,7 +77,7 @@ class ContainerOrderStatus extends StatelessWidget {
                         ),
                       ),
                       Image.asset(
-                        "assets/Ready Stock.png",
+                        imagePreorder_Ready,
                         width: 70,
                         height: 18,
                       ),

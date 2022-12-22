@@ -85,7 +85,7 @@ class _ContainerShoppingCart extends State<ContainerShoppingCart> {
                         ),
                       ),
                       Image.asset(
-                        "assets/Ready Stock.png",
+                        widget.imagePreorder_Ready,
                         width: 70,
                         height: 18,
                       ),

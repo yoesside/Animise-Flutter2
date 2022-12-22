@@ -56,6 +56,8 @@ class _DetailProductPage extends State<DetailProductPage> {
             var product   = json.decode(snapshot.data.toString());
             var formatter = NumberFormat('#,###,000');
 
+            print(product['data']['pre_order']);
+
             return Column(
               children: [
                 Image.network(
@@ -73,7 +75,7 @@ class _DetailProductPage extends State<DetailProductPage> {
                       Row(
                         children: [
                           Image.asset(
-                            product['data']['pre_order'] ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
+                            product['data']['pre_order'] == false ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
                             width: 140,
                             height: 80,
                           ),

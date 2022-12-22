@@ -60,7 +60,7 @@ class _ShoppingCartPage extends State<ShoppingCartPage> {
                     ContainerShoppingCart(
                       cart['id'].toString(), cart['product']['id'].toString(), cart['quantity'],
                       imageProduct: cart['product']['image_url'],
-                      imagePreorder_Ready: cart['product']['pre_order'] == 1 ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
+                      imagePreorder_Ready: cart['product']['pre_order'] == 0 ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
                       nameProduct: cart['product']['name'],
                       price: "IDR " + formatter.format(cart['product']['price']),
                     )
