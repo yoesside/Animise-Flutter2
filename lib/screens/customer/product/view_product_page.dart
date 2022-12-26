@@ -55,7 +55,7 @@ class ViewProductPage extends StatelessWidget {
                           rows.add(
                               ContainerProductWithDelete(
                                 imageProduct: row['image_url'],
-                                imagePreorder_Ready: row['pre_order'] == 1 ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
+                                imagePreorder_Ready: row['pre_order'] == 0 ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
                                 nameProduct: row['name'],
                                 price: "IDR " + formatter.format(row['price']),
                                 id: row['id'],
