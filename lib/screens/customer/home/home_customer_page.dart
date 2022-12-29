@@ -459,7 +459,7 @@ class _HomeCustomerPageState extends State<HomeCustomerPage> {
                                   },
                                   child: ContainerProduct(
                                     imageProduct: wishlist['product']['image_url'],
-                                    imagePreorder_Ready: wishlist['product']['pre_order'] == 1 ? "assets/Pre-Order.png" : "assets/Ready Stock.png",
+                                    imagePreorder_Ready: wishlist['product']['pre_order'] == 0 ? "assets/Pre-Order.png" : "assets/Ready Stock.png",
                                     nameProduct: wishlist['product']['name'],
                                     price: "IDR " + formatter.format(wishlist['product']['price']),
                                     id: wishlist['product']['id'],

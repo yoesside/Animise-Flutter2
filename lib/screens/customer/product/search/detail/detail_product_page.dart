@@ -75,7 +75,7 @@ class _DetailProductPage extends State<DetailProductPage> {
                       Row(
                         children: [
                           Image.asset(
-                            product['data']['pre_order'] == false ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
+                            product['data']['pre_order'] == true ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
                             width: 140,
                             height: 80,
                           ),

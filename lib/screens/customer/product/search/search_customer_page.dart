@@ -83,7 +83,7 @@ class _SearchCustomerPageState extends State<SearchCustomerPage> {
                               },
                               child: ContainerProduct(
                                   imageProduct: row['image_url'],
-                                  imagePreorder_Ready: row['pre_order'] == false ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
+                                  imagePreorder_Ready: row['pre_order'] == true ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
                                   nameProduct: row['name'],
                                   price: "IDR " + formatter.format(row['price']),
                                   id: row['id'],

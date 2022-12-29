@@ -52,7 +52,7 @@ class OrderStatusCustomerPage extends StatelessWidget {
                   widgets.add(
                       ContainerOrderStatus(
                           imageProduct: productOrder['product']['image_url'],
-                          imagePreorder_Ready: productOrder['product']['pre_order'] == 0 ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
+                          imagePreorder_Ready: productOrder['product']['pre_order'] == 1 ? "assets/Ready Stock.png" : "assets/Pre-Order.png",
                           nameProduct: productOrder['product']['name'],
                           price: "IDR " + formatter.format(productOrder['product']['price']),
                           quantity: productOrder['quantity'].toString(),
